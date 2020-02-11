@@ -8,7 +8,7 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   private 
 
   def set_meetings 
-    @meetings = Meeting.all
+  	@meetings =  Meeting.search(params[:search])
   end
 
 end

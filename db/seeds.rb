@@ -28,8 +28,8 @@ meeting_location = Location.where(name: "JP Nagar").last
 User.all.each_with_index do |user, i|
   datetime = DateTime.now + i.day
   meeting_location.rooms.each_with_index do |room, index|
-    time = (datetime + index.hour).strftime("%y-%m-%d %H:00")
+    time = (datetime + index.hour).strftime("%Y-%m-%d %H:00")
     end_time = (datetime + index.hour) + 1.hour
-  	Meeting.create(user_id: user.id, room_id: room.id, start_time: time, end_time: end_time)
+  	Meeting.create(user_id: user.id, room_id: room.id, start_time: time, end_time: end_time, description: "Description #{index + 1}")
   end
 end
