@@ -6,6 +6,11 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+## Application Token
+Doorkeeper::Application.destroy_all
+Doorkeeper::Application.create(name: "Accion Meeting Room", redirect_uri: "urn:ietf:wg:oauth:2.0:oob", scopes: ["read", "write", "delete"])
+
+
 ### User Creation
 users = [
 		{username: "Nikitha Rokhade", email: "nikitha.rokhade@accionlabs.com"}, 
@@ -15,7 +20,7 @@ users = [
 ]
 
 users.each do |user|
-  User.create(email: user[:email], username: user[:username], role: 1, password_digest: "test123", active: true)
+  User.create(email: user[:email], username: user[:username], role: 1, password: "test123", active: true)
 end
 
 ### Location

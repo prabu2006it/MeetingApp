@@ -6,6 +6,8 @@ class Meeting < ApplicationRecord
   has_many :attendees, dependent: :destroy
   has_many :attendee_users, through: :attendees, source: :user
 
+  validates_presence_of :description, :start_time, :end_time
+
   ransacker :by_room_id, formatter: proc { |room_id|
     meetings = Meeting.where(room_id: room_id)
     meetings = meetings.present? ? meetings.pluck(:id) : nil
