@@ -5,6 +5,11 @@ class Api::V1::MeetingsController < Api::V1::BaseController
   
   end
 
+  def create
+  	Meeting.create()
+
+  end
+
   private 
 
   def set_meetings 

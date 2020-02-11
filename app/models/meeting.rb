@@ -4,6 +4,7 @@ class Meeting < ApplicationRecord
   belongs_to :room
 
   has_many :attendees, dependent: :destroy
+  has_many :attendee_users, through: :attendees, source: :user
 
   ransacker :by_room_id, formatter: proc { |room_id|
     meetings = Meeting.where(room_id: room_id)

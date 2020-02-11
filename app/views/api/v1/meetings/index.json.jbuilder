@@ -7,5 +7,10 @@ json.set! :meetings do
     json.set! :room do 
       json.(meeting.room, :id, :name)    	
     end
+    json.set! :attendees do 
+      json.array meeting.attendee_users do |user|
+      	json.(user, :id, :email, :username)
+      end
+    end
   end
 end

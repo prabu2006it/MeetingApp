@@ -9,7 +9,10 @@
 ### User Creation
 users = [
 		{username: "Nikitha Rokhade", email: "nikitha.rokhade@accionlabs.com"}, 
-		{username: "Prabu Gnanasekar", email: "prabu.gnanasekar@accionlabs.com"}]
+		{username: "Prabu Gnanasekar", email: "prabu.gnanasekar@accionlabs.com"},
+    {username: "Madhusudhan V", email: "madhusudhan.v@accionlabs.com"}, 
+    {username: "Vinutha Shreyas", email: "vinutha.shreyas@accionlabs.com"}
+]
 
 users.each do |user|
   User.create(email: user[:email], username: user[:username], role: 1, password_digest: "test123", active: true)
@@ -30,6 +33,8 @@ User.all.each_with_index do |user, i|
   meeting_location.rooms.each_with_index do |room, index|
     time = (datetime + index.hour).strftime("%Y-%m-%d %H:00")
     end_time = (datetime + index.hour) + 1.hour
-  	Meeting.create(user_id: user.id, room_id: room.id, start_time: time, end_time: end_time, description: "Description #{index + 1}")
+  	meeting = Meeting.create(user_id: user.id, room_id: room.id, start_time: time, end_time: end_time, description: "Description #{index + 1}")
+    meeting.attendee_users = User.where.not(id: user.id)
+    meeting.save
   end
 end
