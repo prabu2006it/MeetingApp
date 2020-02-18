@@ -15,6 +15,10 @@ class Api::V1::MeetingsController < Api::V1::BaseController
     end
   end
 
+  def dropdown_values
+    
+  end
+
   private 
 
   def set_meetings 

@@ -34,4 +34,36 @@ class Meeting < ApplicationRecord
     ransack(query).result(distinct: true)
   end
 
+  def self.get_slots(slot_size, date, start_time, end_time)
+    slots = []
+
+    slots.concat get_day_slots(slot_size, date, start_time, end_time)
+    byebug
+
+    slots.each do |s|
+      self..each do |meeting|
+        if meeting.start_date < s.end_time and meeting.end_date > s.start_time
+          s.user_id = meeting.user_id
+          s.booked = true
+        end
+      end
+    end
+    
+    slots
+  end
+
+  private 
+
+  def self.get_day_slots(slot_size, date, start_time, end_time)
+    slots = []
+    slot_count = ((end_time - start_time) / (slot_size * 60)).to_i
+    byebug
+    slot_count.times do |i|
+      slot_start_time = start_time + (i * slot_size).minutes
+      slot_start_time = DateTime.new(date.year, date.month, date.day, slot_start_time.hour, slot_start_time.min, slot_start_time.sec)
+      slot_end_time = slot_start_time + slot_size.minutes
+      slots << {day: date.day, start_time: slot_start_time, end_time: slot_end_time, booked: false}
+    end
+    slots
+  end
 end

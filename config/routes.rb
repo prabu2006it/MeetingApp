@@ -5,7 +5,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :meetings
+      resources :meetings do
+        get :dropdown_values, on: :collection
+      end
       resources :users do 
       	post :signin, on: :collection
       	delete :signout, on: :collection

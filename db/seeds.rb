@@ -13,8 +13,8 @@ Doorkeeper::Application.create(name: "Accion Meeting Room", redirect_uri: "urn:i
 
 ### User Creation
 users = [
-		{username: "Nikitha Rokhade", email: "nikitha.rokhade@accionlabs.com"}, 
-		{username: "Prabu Gnanasekar", email: "prabu.gnanasekar@accionlabs.com"},
+		{username: "Nikitha Rokhade", email: "nikitha.rokhade@accionlabs.com", password: "test123"}, 
+		{username: "Prabu Gnanasekar", email: "prabu.gnanasekar@accionlabs.com", password: "test123"},
     {username: "Madhusudhan V", email: "madhusudhan.v@accionlabs.com"}, 
     {username: "Vinutha Shreyas", email: "vinutha.shreyas@accionlabs.com"}
 ]
