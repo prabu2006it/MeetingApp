@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :users do 
       	post :signin, on: :collection
       	delete :signout, on: :collection
+        post :auth_login, on: :collection
       end
     end
   end

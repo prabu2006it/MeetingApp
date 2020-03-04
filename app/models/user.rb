@@ -1,11 +1,7 @@
 class User < ApplicationRecord
 
   has_many :meetings
-
-  has_secure_password
-
-  enum role: {"Normal User": 1}
-
+  
   after_save :update_username
   # DoorKeeper Access Token
   def get_access_token(app)

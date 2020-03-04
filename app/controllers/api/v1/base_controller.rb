@@ -9,7 +9,7 @@ class Api::V1::BaseController < ActionController::Base
   end
 
   def current_user
-    User.find(current_token.resource_owner_id) unless current_token.nil?
+    User.where(current_token: params[:jwt]).last if params[:jwt].present?
   end
 
   def authorize_application
@@ -23,5 +23,11 @@ class Api::V1::BaseController < ActionController::Base
 
   def render_error(resource, status)
     render json: resource.errors, status: status
+  end
+
+  def check_current_user
+    if current_user.blank?
+      not_authorized
+    end
   end
 end

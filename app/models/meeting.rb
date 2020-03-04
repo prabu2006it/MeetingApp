@@ -8,6 +8,8 @@ class Meeting < ApplicationRecord
 
   validates_presence_of :description, :start_time, :end_time
 
+  accepts_nested_attributes_for :attendees, allow_destroy: true
+
   ransacker :by_room_id, formatter: proc { |room_id|
     meetings = Meeting.where(room_id: room_id)
     meetings = meetings.present? ? meetings.pluck(:id) : nil
@@ -38,7 +40,6 @@ class Meeting < ApplicationRecord
     slots = []
 
     slots.concat get_day_slots(slot_size, date, start_time, end_time)
-    byebug
 
     slots.each do |s|
       self..each do |meeting|
@@ -57,7 +58,6 @@ class Meeting < ApplicationRecord
   def self.get_day_slots(slot_size, date, start_time, end_time)
     slots = []
     slot_count = ((end_time - start_time) / (slot_size * 60)).to_i
-    byebug
     slot_count.times do |i|
       slot_start_time = start_time + (i * slot_size).minutes
       slot_start_time = DateTime.new(date.year, date.month, date.day, slot_start_time.hour, slot_start_time.min, slot_start_time.sec)
