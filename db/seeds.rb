@@ -10,19 +10,6 @@
 Doorkeeper::Application.destroy_all
 Doorkeeper::Application.create(name: "Accion Meeting Room", redirect_uri: "urn:ietf:wg:oauth:2.0:oob", scopes: ["read", "write", "delete"])
 
-
-### User Creation
-users = [
-		{username: "Nikitha Rokhade", email: "nikitha.rokhade@accionlabs.com", password: "test123"}, 
-		{username: "Prabu Gnanasekar", email: "prabu.gnanasekar@accionlabs.com", password: "test123"},
-    {username: "Madhusudhan V", email: "madhusudhan.v@accionlabs.com"}, 
-    {username: "Vinutha Shreyas", email: "vinutha.shreyas@accionlabs.com"}
-]
-
-users.each do |user|
-  User.create(email: user[:email], username: user[:username], role: 1, password: "test123", active: true)
-end
-
 ### Location
 ["JP Nagar", "Whitefield - Gamma", "Whitefield - Delta"].each do |loc|
   location = Location.create(name: loc)
